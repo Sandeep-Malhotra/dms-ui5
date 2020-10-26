@@ -1,0 +1,32 @@
+<core:FragmentDefinition
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m">
+    <Table id="documents" items="{path: 'docuDataModel>/Documents'}">
+        <columns>
+            <Column width="12em" vAlign="Middle" hAlign="Left">
+                <Text text="{i18n>documentName}" />
+            </Column>
+            <Column width="12em" vAlign="Middle" hAlign="Left">
+                <Text text="{i18n>file}" />
+            </Column>
+            <Column width="5em" vAlign="Middle" hAlign="Left">
+                <Text text="{i18n>size}" />
+            </Column>
+            <Column width="8em" vAlign="Middle">
+                <Text text="{i18n>category}" />
+            </Column>
+            <Column width="2em" hAlign="Right"/>
+            <Column width="2em" hAlign="Left"/>
+        </columns>
+        <items>
+            <ColumnListItem>
+                <Text text="{docuDataModel>DocumentName}"/>
+                <Text text="{docuDataModel>File}"/>
+                <Text text="{docuDataModel>Size}"/>
+                <Text text="{docuDataModel>Category}"/>
+                <Button icon="sap-icon://delete" width="1em" press="onDelete" type="Reject"/>
+                <Button icon="sap-icon://edit" width="1em" press="onEdit" type="Accept"/>
+            </ColumnListItem>
+        </items>
+    </Table>
+</core:FragmentDefinition>

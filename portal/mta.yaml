@@ -1,0 +1,66 @@
+_schema-version: "3.2"
+ID: portal
+version: 0.0.1
+modules:
+- name: portal-approuter
+  type: approuter.nodejs
+  path: portal-approuter
+  requires:
+  - name: portal_html_repo_runtime
+  - name: portal_uaa
+  - name: DMS-Integration
+    properties: 
+      destinations: "[{\"name\": \"sdibackend\", \"url\": \"https://api-sdm-di.cfapps.sap.hana.ondemand.com\", \"forwardAuthToken\": true}]"
+  parameters:
+    disk-quota: 256M
+    memory: 256M
+- name: portal_ui_deployer
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: portal_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - DocumentModule-content.zip
+      name: DocumentModule
+      target-path: resources/
+- name: DocumentModule
+  type: html5
+  path: DocumentModule
+  build-parameters:
+    builder: custom
+    commands:
+    - npm run build
+    supported-platforms: []
+resources:
+- name: portal_html_repo_runtime
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-runtime
+- name: portal_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-plan: app-host
+- name: portal_uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: portal-xsuaa-service
+    service-plan: application
+- name: DMS-Integration
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: sdm
+    service-plan: standard
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm install

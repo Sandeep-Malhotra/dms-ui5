@@ -1,0 +1,28 @@
+{
+    "Documents":[
+        {
+            "DocumentName":"Quality Plan",
+            "File":"quality.pdf",
+            "Size":"10kb",
+            "Category":"Pest Control"
+        },
+         {
+            "DocumentName":"Architect Plan",
+            "File":"architect.pdf",
+            "Size":"10kb",
+            "Category":"Architect"
+        },
+         {
+            "DocumentName":"Receival Plan",
+            "File":"receival.pdf",
+            "Size":"10kb",
+            "Category":"Receival Plan"
+        },
+         {
+            "DocumentName":"Grower List",
+            "File":"grower.pdf",
+            "Size":"30kb",
+            "Category":"List"
+        }
+    ]
+}
